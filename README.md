@@ -91,6 +91,13 @@ This project will follow the DRY (Don't Repeat Yourself) principle. This means t
 ## User Interface Design
 
 <!-- Mockups/Sketches: Include links to UI mockups or sketches (you can host images directly on GitHub or use links to external tools like Figma). -->
+
+### Desktop
+
+![](./Design/rEDDIT4CODE_dESKTOP.png)
+
+### Mobile
+
 <!-- Navigation Flow: Describe the navigation flow between different parts of your app, possibly with a simple diagram. -->
 
 ## Testing Strategy
