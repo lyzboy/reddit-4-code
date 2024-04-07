@@ -17,10 +17,10 @@ This app allows users to view posts from a group of preselected subreddits.
 -   View any media contained with the post (images, videos, etc.)
 -   View the number of upvotes the post has received.
 -   Search the current subreddit for posts that match the search term.
+-   Log in to reddit for API access
 
 #### Users cannot:
 
--   Log in to reddit
 -   Post comments or posts
 -   Upvote or downvote posts
 -   View posts from subreddits not included in the preselected list
@@ -40,6 +40,9 @@ This project is a static front-end only app and will be the following technologi
 -   Jest: Jest has been chosen for its ease of testing with React components.
 -   Enzyme: Enzyme has been chosen to allow for easy testing of JS functions.
 -   RTL: RTL has been chosen to allow for easy testing of React components.
+-   Netlify: Netlify has been chosen to host the app and to allow for easy deployment of the app.
+-   GitHub Actions: GitHub Actions has been chosen to allow for continuous integration and continuous deployment of the app.
+-   Reddit API: The Reddit API has been chosen to allow for easy access to the posts from the preselected subreddits.
 
 ## System Overview
 
@@ -81,6 +84,10 @@ This project will follow the DRY (Don't Repeat Yourself) principle. This means t
 -   **View Upvotes** - The user can view the number of upvotes the post has received.
 -   **Search Posts** - The user can search the current subreddit for posts that match the search term.
 
+-   **Dynamic Content Retrieval from Reddit API** - The app will retrieve posts data of the preselected subreddits from the Reddit API and display them in the app. This will be handled asynchronously to ensure that the app remains responsive and informative during data loading.
+    -   **Implementation** - Utilize Redux async thunks for making API calls. This will include creating thunks that dispatch actions based on the success or failure of the Reddit API requests.
+    -   **User Experience** - The app will display a loading bar while the data is being fetched from the Reddit API. This will provide feedback to the user that the app is working on retrieving the data.
+
 ### Use Cases
 
 -   **Select a Subreddit** - The user clicks on a subreddit from the list of preselected subreddits. The app displays the posts from the selected subreddit.
@@ -90,19 +97,22 @@ This project will follow the DRY (Don't Repeat Yourself) principle. This means t
 
 ## User Interface Design
 
-<!-- Mockups/Sketches: Include links to UI mockups or sketches (you can host images directly on GitHub or use links to external tools like Figma). -->
+Each component that relies on external data from the Reddit API includes a visually engaging loading state. For instance, the PostList component displays a spinner animation until the fetch operation completes. This approach keeps users informed about the ongoing data retrieval process, enhancing the overall user experience.
 
 ### Desktop
 
-![](./Design/rEDDIT4CODE_dESKTOP.png)
+![](./Design/rEDDIT4CODE_dESKTOP.png)  
 _Showing home screen_
 
 ### Mobile
 
-![](./Design/rEDDIT4CODE_MOBILE.png)
+![](./Design/rEDDIT4CODE_MOBILE.png)  
 _Showing homw and navbar expanded_
 
-<!-- Navigation Flow: Describe the navigation flow between different parts of your app, possibly with a simple diagram. -->
+### Navigation Flow
+
+![](./Design/reddit4code_navFlow.png)  
+_Navigation flow of app_
 
 ## Testing Strategy
 
@@ -112,6 +122,8 @@ This app will be tested with Jest, Enzyme, and RTL. The app will be divided into
 -   **State Management** - The state management of the app will be tested with integration tests to ensure that the state is being managed correctly and that the state is being passed to the correct components.
 -   **Utility Functions** - Utility functions will be tested with unit tests to ensure that the functions return the correct values and that the functions behave as expected.
 -   **User Interaction** - User interaction will be tested with end-to-end tests to ensure that the user can interact with the app as expected and that the app responds correctly to user input.
+-   **Async Data Fetching** - Test async thunks responsible for Reddit API calls to ensure they correctly manage the state throughout the lifecycle of a request (pending, fulfilled, and rejected).
+-   **Loading States** - Verify that components correctly render loading indicators during data retrieval and properly render the content once data is fetched.
 
 ## Deployment
 
@@ -123,4 +135,6 @@ Upon release, the app will be deployed on Netlify. The app will be deployed usin
 
 <!-- Changelog: Keep a section for updates and changes. As you progress in your development, update this section to reflect modifications or additions to the project plan. -->
 
-1.0.0 - 4/5/24 - Initial project setup
+### 1
+
+-   **0.0** _(4/5/24)_ - Initial design setup
