@@ -95,8 +95,12 @@ This project will follow the DRY (Don't Repeat Yourself) principle. This means t
 ### Desktop
 
 ![](./Design/rEDDIT4CODE_dESKTOP.png)
+_Showing home screen_
 
 ### Mobile
+
+![](./Design/rEDDIT4CODE_MOBILE.png)
+_Showing homw and navbar expanded_
 
 <!-- Navigation Flow: Describe the navigation flow between different parts of your app, possibly with a simple diagram. -->
 
