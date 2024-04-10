@@ -4,6 +4,12 @@
 
 This is a minimalized reddit application that showcases a group of preselected subreddits. The target audience is developers who want to keep up with the latest news and trends in the tech industry.
 
+## Installation of development environment
+
+1. Clone the repository
+2. Run `npm install` to install the dependencies
+3. Run `npm start` to start the development server
+
 ### Scope
 
 This app allows users to view posts from a group of preselected subreddits.
