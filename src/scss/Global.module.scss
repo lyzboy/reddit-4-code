@@ -1,0 +1,9 @@
+@import "./common.scss";
+
+:global {
+    .button {
+        background-color: map-get($theme-colors, "primary");
+        color: map-get($theme-colors, "dark");
+        padding: 1rem;
+    }
+}
