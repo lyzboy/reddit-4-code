@@ -1,0 +1,54 @@
+@import "../../scss/common.scss";
+
+.Header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "subreddit search logo";
+    margin: 2rem;
+}
+
+.subreddit {
+    grid-area: subreddit;
+    margin: auto 0;
+}
+
+.search {
+    grid-area: search;
+    width: 100%;
+}
+
+.logo {
+    grid-area: logo;
+    text-align: right;
+    margin: auto 0;
+}
+
+.navbar {
+    grid-area: navbar;
+    visibility: hidden;
+}
+
+@media screen and (max-width: 768px) {
+    .Header {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "logo navbar" "search search" "subreddit subreddit";
+    }
+
+    .navbar {
+        visibility: visible;
+        align-self: center;
+        justify-self: end;
+        width: 2.5rem;
+        padding: auto;
+        border-radius: 5px;
+    }
+
+    .navbar:hover {
+        cursor: pointer;
+        background-color: map-get($theme-colors, "primary");
+    }
+
+    .logo {
+        text-align: left;
+    }
+}
