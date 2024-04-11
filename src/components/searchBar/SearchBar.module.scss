@@ -1,0 +1,22 @@
+@import "../../scss//common.scss";
+
+.SearchBar {
+    width: 100%;
+    padding: 0 2rem;
+}
+
+.input {
+    width: 100%;
+    margin: 1rem auto;
+    height: 4rem;
+    border: solid 2px rgba(map-get($theme-colors, "dark"), 0.2);
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(map-get($theme-colors, "dark"), 0.1);
+    padding: 0 1rem;
+}
+
+@media screen and (min-width: 768px) {
+    .input {
+        margin: 1rem auto;
+    }
+}
