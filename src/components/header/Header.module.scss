@@ -28,6 +28,36 @@
     visibility: hidden;
 }
 
+.logoContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.colored {
+    color: map-get($theme-colors, "info");
+}
+
+.icon {
+    fill: map-get($theme-colors, "info");
+}
+
+.navbarList {
+    position: absolute;
+    top: 7rem;
+    left: 0;
+    width: 100%;
+    background-color: map-get($theme-colors, "primary");
+}
+
+.disabled {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
 @media screen and (max-width: 768px) {
     .Header {
         grid-template-columns: 1fr 1fr;
