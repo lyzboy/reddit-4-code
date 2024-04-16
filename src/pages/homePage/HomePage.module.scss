@@ -1,0 +1,22 @@
+.HomePage {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.postList {
+    flex: 8 1 auto;
+}
+
+.nav {
+    flex: 1 1 auto;
+}
+
+.disabled {
+    display: none;
+}
+
+.visible {
+    //display: block;
+}

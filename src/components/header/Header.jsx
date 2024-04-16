@@ -13,19 +13,20 @@ const Header = () => {
     };
 
     useEffect(() => {
+        // close mobile nav bar if screen size is greater than 768px
         const mediaQuery = window.matchMedia("(max-width: 768px)");
-        if (!mediaQuery.matches) {
-            setShowNav(false);
-        }
 
         const handleResize = () => {
-            if (!mediaQuery.matches) {
-                setShowNav(false);
-            }
+            setShowNav(false);
         };
 
-        mediaQuery.addListener(handleResize);
-        return () => mediaQuery.removeListener(handleResize);
+        handleResize();
+
+        mediaQuery.addEventListener("change", handleResize);
+
+        return () => {
+            mediaQuery.removeEventListener("change", handleResize);
+        };
     }, []);
 
     const redditIcon = (
