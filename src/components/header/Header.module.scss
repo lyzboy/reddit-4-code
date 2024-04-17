@@ -23,8 +23,8 @@
     margin: auto 0;
 }
 
-.navbar {
-    grid-area: navbar;
+.navbarButton {
+    grid-area: navbarButton;
     visibility: hidden;
 }
 
@@ -61,10 +61,10 @@
 @media screen and (max-width: 768px) {
     .Header {
         grid-template-columns: 1fr 1fr;
-        grid-template-areas: "logo navbar" "search search" "subreddit subreddit";
+        grid-template-areas: "logo navbarButton" "search search" "subreddit subreddit";
     }
 
-    .navbar {
+    .navbarButton {
         visibility: visible;
         align-self: center;
         justify-self: end;
@@ -73,7 +73,7 @@
         border-radius: 5px;
     }
 
-    .navbar:hover {
+    .navbarButton:hover {
         cursor: pointer;
         background-color: map-get($theme-colors, "primary");
     }

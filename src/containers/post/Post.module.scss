@@ -1,0 +1,60 @@
+@import "../../scss/common.scss";
+
+.Post {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: auto auto auto;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.Post__name {
+    grid-column: 1 / span 6;
+}
+
+.Post__arrows {
+    grid-column: 1 / span 1;
+}
+
+.Post__image {
+    grid-column: 2 / span 5;
+}
+
+.Post__date {
+    grid-column: 1 / span 2;
+}
+
+.Post__author {
+    grid-column: 3 / span 2;
+}
+
+.Post__comments {
+    grid-column: 5 / span 2;
+}
+
+.imageContainer {
+    overflow: hidden;
+    width: 100%; // Make it responsive
+    height: 75%; // Maintain aspect ratio
+    display: flex;
+    justify-content: center; // Center the image horizontally
+    align-items: center; // Center the image vertically
+}
+
+.imageContainer img {
+    max-width: 100%; // Maximum size is the container size
+    max-height: 100%; // Maximum height is the container size
+    object-fit: contain; // Ensures the image is fully visible within the container
+}
+
+.testBox {
+    border: solid 1px red;
+}
+
+.small {
+    height: 10rem;
+}
+
+.big {
+    height: 60rem;
+}

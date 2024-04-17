@@ -55,14 +55,14 @@ const Header = () => {
             {!showNav ? (
                 <span
                     onClick={handleShowNav}
-                    className={`material-symbols-outlined ${styles.navbar}`}
+                    className={`material-symbols-outlined ${styles.navbarButton}`}
                 >
                     menu
                 </span>
             ) : (
                 <span
                     onClick={handleShowNav}
-                    class={`material-symbols-outlined ${styles.navbar}`}
+                    class={`material-symbols-outlined ${styles.navbarButton}`}
                 >
                     close
                 </span>
