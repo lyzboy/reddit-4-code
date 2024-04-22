@@ -6,30 +6,80 @@
     grid-template-columns: auto auto auto;
     gap: 1rem;
     padding: 1rem;
+    border-bottom: solid 1px black;
 }
 
 .Post__name {
     grid-column: 1 / span 6;
+    font-size: 2.4rem;
+    background-color: rgb(233, 233, 233);
+    border-radius: 10px;
+    padding: 5px;
+    width: 100%;
+    overflow: hidden;
+    line-height: 2.4rem;
 }
 
 .Post__arrows {
     grid-column: 1 / span 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 2rem;
+}
+
+.Post__arrows__upvote,
+.Post__arrows__downvote {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 25;
+    font-size: 4rem;
+    padding: 0.5rem;
+    transition: font-variation-settings 0.4s;
+}
+
+.Post__arrows__upvote:hover,
+.Post__arrows__downvote:hover {
+    font-variation-settings: "FILL" 0, "wght" 900, "GRAD" 0, "opsz" 25;
+    cursor: pointer;
+}
+
+.Post__arrows__upvote {
+    color: green;
+}
+
+.Post__arrows__downvote {
+    color: red;
 }
 
 .Post__image {
     grid-column: 2 / span 5;
+    padding: 1rem;
+    box-shadow: -5px 5px 5px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    font-size: 1.8rem;
 }
 
 .Post__date {
     grid-column: 1 / span 2;
 }
 
+.Post__date,
+.Post__author,
+.Post__comments {
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .Post__author {
     grid-column: 3 / span 2;
+    color: blue;
 }
 
 .Post__comments {
     grid-column: 5 / span 2;
+    color: gray;
 }
 
 .imageContainer {
@@ -57,4 +107,43 @@
 
 .big {
     height: 60rem;
+}
+
+@media screen and (max-width: 768px) {
+    .Post {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; /* Adjust column sizes if needed */
+        grid-template-rows: auto auto auto; /* Adjust based on content size */
+        grid-template-areas:
+            "arrows name name name name name"
+            "image image image image image image"
+            "date date author author comments comments";
+        gap: 0.5rem; /* Optional: for spacing between grid items */
+    }
+
+    .Post__name {
+        grid-area: name;
+        font-size: 1.9rem;
+    }
+
+    .Post__arrows {
+        grid-area: arrows;
+        height: 15rem;
+    }
+
+    .Post__image {
+        grid-area: image;
+    }
+
+    .Post__date {
+        grid-area: date;
+    }
+
+    .Post__author {
+        grid-area: author;
+    }
+
+    .Post__comments {
+        grid-area: comments;
+    }
 }
