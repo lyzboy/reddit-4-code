@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import Post from "../../containers/post/Post";
+import PostList from "../../containers/postList/PostList";
 import NavBar from "../../containers/navBar/NavBar";
 
 import styles from "./HomePage.module.scss";
 
 const HomePage = () => {
     const [showNav, setShowNav] = useState(false);
-
-    const handleShowNav = () => {
-        setShowNav(!showNav);
-    };
 
     useEffect(() => {
         const mediaQuery = window.matchMedia("(max-width: 768px)");
@@ -32,7 +28,7 @@ const HomePage = () => {
 
     return (
         <div className={styles.HomePage}>
-            <Post className={styles.postList} />
+            <PostList className={styles.postList} />
 
             <NavBar
                 className={`${styles.nav} ${
