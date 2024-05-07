@@ -1,19 +1,15 @@
 .HomePage {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .postList {
-    flex: 8 1 auto;
-    height: 100%;
 }
 
 .nav {
-    flex: 1 1 auto;
-    justify-self: flex-start;
-    height: 100%;
+    width: 50%;
 }
 
 .disabled {
@@ -21,5 +17,5 @@
 }
 
 .visible {
-    //display: block;
+    display: block;
 }

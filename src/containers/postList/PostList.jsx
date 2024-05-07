@@ -4,13 +4,13 @@ import Post from "../post/Post";
 
 import styles from "./PostList.module.scss";
 
-const PostList = ({ className }) => {
+const PostList = () => {
     return (
-        <div className={`${className} ${styles.PostList}`}>
-            <Post />
-            <Post />
-            <Post />
-            <Post />
+        <div className={`${styles.PostList}`}>
+            <Post className={""} />
+            <Post className={""} />
+            <Post className={""} />
+            <Post className={""} />
         </div>
     );
 };

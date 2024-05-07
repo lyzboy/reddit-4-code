@@ -28,7 +28,7 @@ const HomePage = () => {
 
     return (
         <div className={styles.HomePage}>
-            <PostList className={styles.postList} />
+            <PostList />
 
             <NavBar
                 className={`${styles.nav} ${
