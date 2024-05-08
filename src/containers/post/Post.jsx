@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 import styles from "./Post.module.scss";
 
 import testImage from "../../assets/images/pexels-pixabay-259984.jpg";
 
 import { FormatLocalDate } from "../../utils/utils";
+import CommentList from "../../components/commentList/CommentList";
 
 const Post = ({ className }) => {
     const postName =
@@ -17,6 +18,8 @@ const Post = ({ className }) => {
     const author = "ZzWingManzZ";
 
     const commentCount = 55;
+
+    const [showComments, setShowComments] = useState(false);
 
     return (
         <div className={`${className} ${styles.Post}`}>
@@ -48,10 +51,16 @@ const Post = ({ className }) => {
             <div className={`${styles.Post__author} ${styles.small}`}>
                 <p>{author}</p>
             </div>
-            <div className={`${styles.Post__comments} ${styles.small}`}>
+            <div
+                className={`${styles.Post__comments} ${styles.small}`}
+                onClick={() => setShowComments(!showComments)}
+            >
                 <span className="material-symbols-outlined">chat_bubble</span>
                 <p>{commentCount}</p>
             </div>
+            <CommentList
+                parentClassName={showComments ? styles.visible : styles.hidden}
+            />
         </div>
     );
 };

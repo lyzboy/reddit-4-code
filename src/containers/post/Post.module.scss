@@ -80,6 +80,10 @@
 .Post__comments {
     grid-column: 5 / span 2;
     color: gray;
+    &:hover {
+        color: black;
+        cursor: pointer;
+    }
 }
 
 .imageContainer {
@@ -107,6 +111,14 @@
 
 .big {
     height: 60rem;
+}
+
+.visible {
+    display: block;
+}
+
+.hidden {
+    display: none;
 }
 
 @media screen and (max-width: 768px) {
