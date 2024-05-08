@@ -59,7 +59,9 @@ const Post = ({ className }) => {
                 <p>{commentCount}</p>
             </div>
             <CommentList
-                parentClassName={showComments ? styles.visible : styles.hidden}
+                parentClassName={`${
+                    showComments ? styles.visible : styles.hidden
+                } ${styles.commentList}`}
             />
         </div>
     );

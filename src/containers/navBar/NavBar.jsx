@@ -14,11 +14,6 @@ const NavBar = ({ className }) => {
             <NavBarTile />
             <NavBarTile />
             <NavBarTile />
-            <NavBarTile />
-            <NavBarTile />
-            <NavBarTile />
-            <NavBarTile />
-            <NavBarTile />
         </nav>
     );
 };

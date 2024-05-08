@@ -3,10 +3,13 @@
     flex-direction: row;
     align-items: flex-start;
     justify-content: flex-start;
+    height: 100%;
+    overflow: visible;
 }
 
 .nav {
-    width: 50%;
+    position: sticky;
+    top: 0;
 }
 
 .disabled {

@@ -6,13 +6,13 @@
     grid-template-columns: auto auto auto;
     gap: 1rem;
     padding: 1rem;
-    border-bottom: solid 1px black;
+    border-bottom: solid 1px map-get($theme-colors, "dark");
 }
 
 .Post__name {
     grid-column: 1 / span 6;
     font-size: 2.4rem;
-    background-color: rgb(233, 233, 233);
+    background-color: map-get($theme-colors, "primary");
     border-radius: 10px;
     padding: 10px;
     width: 100%;
@@ -44,17 +44,17 @@
 }
 
 .Post__arrows__upvote {
-    color: green;
+    color: map-get($theme-colors, "success");
 }
 
 .Post__arrows__downvote {
-    color: red;
+    color: map-get($theme-colors, "danger");
 }
 
 .Post__image {
     grid-column: 2 / span 5;
     padding: 1rem;
-    box-shadow: -5px 5px 5px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: -5px 5px 5px 5px rgba(map-get($theme-colors, "dark"), 0.2);
     border-radius: 10px;
     font-size: 1.8rem;
 }
@@ -74,16 +74,20 @@
 
 .Post__author {
     grid-column: 3 / span 2;
-    color: blue;
+    color: map-get($theme-colors, "info");
 }
 
 .Post__comments {
     grid-column: 5 / span 2;
     color: gray;
     &:hover {
-        color: black;
+        color: map-get($theme-colors, "dark");
         cursor: pointer;
     }
+}
+
+.commentList {
+    grid-column: 1 / span 6;
 }
 
 .imageContainer {
@@ -102,7 +106,7 @@
 }
 
 .testBox {
-    border: solid 1px red;
+    border: solid 1px map-get($theme-colors, "danger");
 }
 
 .small {
@@ -125,11 +129,12 @@
     .Post {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; /* Adjust column sizes if needed */
-        grid-template-rows: auto auto auto; /* Adjust based on content size */
+        grid-template-rows: auto auto auto auto; /* Adjust based on content size */
         grid-template-areas:
             "arrows name name name name name"
             "image image image image image image"
-            "date date author author comments comments";
+            "date date author author comments comments"
+            "commentList commentList commentList commentList commentList commentList";
         gap: 0.5rem; /* Optional: for spacing between grid items */
     }
 
@@ -157,5 +162,9 @@
 
     .Post__comments {
         grid-area: comments;
+    }
+
+    .commentList {
+        grid-area: commentList;
     }
 }
