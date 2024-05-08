@@ -7,3 +7,10 @@ export function FormatLocalDate(date) {
 
     return new Date(date).toLocaleDateString(undefined, options);
 }
+
+export function GenerateARandomString() {
+    return (
+        Math.random().toString(36).substring(2, 15) +
+        Math.random().toString(36).substring(2, 15)
+    );
+}
