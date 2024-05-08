@@ -1,8 +1,8 @@
 import { GenerateARandomString } from "../utils/utils";
 
-const clientId = process.env.REACT_APP_CLIENT_ID;
+const clientId = encodeURIComponent(process.env.REACT_APP_CLIENT_ID);
 const redirectUri = encodeURIComponent("http://localhost:3000");
-const state = GenerateARandomString();
+const state = encodeURIComponent(GenerateARandomString());
 const scope = encodeURIComponent("identity, read");
 
 export const redirectToRedditAuth = () => {
@@ -19,9 +19,21 @@ export const extractToken = () => {
     const accessToken = params.get("access_token");
     // retrieve the random state provided during auth
     const returnedState = params.get("state");
+    console.log(`State: ${state}, Returned state: ${returnedState}`);
     if (returnedState !== state) {
         throw new Error("State mismatch: potential CSRF attack");
     }
 
+    localStorage.setItem("accessToken", accessToken);
     return accessToken;
+};
+
+export const getStoredToken = () => {
+    const token = localStorage.getItem("accessToken");
+    return token;
+};
+
+export const isAuthenticated = () => {
+    const token = getStoredToken();
+    return !!token;
 };

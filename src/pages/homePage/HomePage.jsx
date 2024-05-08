@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
+import {
+    isAuthenticated,
+    getStoredToken,
+    redirectToRedditAuth,
+    extractToken,
+} from "../../services/authService";
+import { fetchNewPosts } from "../../services/redditServices";
 
 import PostList from "../../containers/postList/PostList";
 import NavBar from "../../containers/navBar/NavBar";
@@ -9,6 +16,25 @@ const HomePage = () => {
     const [showNav, setShowNav] = useState(false);
 
     useEffect(() => {
+        async function fetchData() {
+            if (!isAuthenticated()) {
+                await redirectToRedditAuth();
+                extractToken();
+            } else {
+                const accessToken = getStoredToken();
+                try {
+                    const newPosts = await fetchNewPosts("code", accessToken);
+                    console.log(newPosts);
+                } catch (error) {
+                    console.error("Failed to fetch new posts:", error);
+                    //redirectToRedditAuth();
+                }
+            }
+        }
+        fetchData();
+    }, []);
+
+    useEffect(() => {
         const mediaQuery = window.matchMedia("(max-width: 768px)");
 
         /**
@@ -17,15 +43,19 @@ const HomePage = () => {
         const handleResize = () => {
             // Set the value of showNav based on the media query match
             setShowNav(!mediaQuery.matches);
-            /**
-             * Adjusts the margin-top of the postList based on the media query match due to the fixed header position.
-             */
+            adjustPostListMargin(mediaQuery.matches);
+        };
+
+        /**
+         * Adjusts the margin-top of the postList based on the media query match due to the fixed header position.
+         */
+        const adjustPostListMargin = (matches) => {
             // Get the postList and header elements
             const postListElement = document.querySelector(".postList");
             const headerElement = document.querySelector("header");
 
             // Adjust the margin-top of the postList based on the media query match
-            if (mediaQuery.matches) {
+            if (matches) {
                 // Check if headerElement and postListElement are not null before accessing clientHeight
                 if (headerElement && postListElement) {
                     const navBarHeight = headerElement.clientHeight;
