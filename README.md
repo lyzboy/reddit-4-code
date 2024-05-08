@@ -113,7 +113,7 @@ _Showing home screen_
 ### Mobile
 
 ![](./Design/rEDDIT4CODE_MOBILE.png)  
-_Showing homw and navbar expanded_
+_Showing home and navbar expanded_
 
 ### Navigation Flow
 

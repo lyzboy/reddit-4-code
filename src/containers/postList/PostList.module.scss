@@ -1,0 +1,9 @@
+@import "../../scss/common.scss";
+
+.PostList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 3rem;
+}

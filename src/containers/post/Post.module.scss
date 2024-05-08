@@ -1,0 +1,170 @@
+@import "../../scss/common.scss";
+
+.Post {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: auto auto auto;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: solid 1px map-get($theme-colors, "dark");
+}
+
+.Post__name {
+    grid-column: 1 / span 6;
+    font-size: 2.4rem;
+    background-color: map-get($theme-colors, "primary");
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;
+    overflow: hidden;
+    line-height: 2rem;
+}
+
+.Post__arrows {
+    grid-column: 1 / span 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 2rem;
+}
+
+.Post__arrows__upvote,
+.Post__arrows__downvote {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 25;
+    font-size: 4rem;
+    padding: 0.5rem;
+    transition: font-variation-settings 0.4s;
+}
+
+.Post__arrows__upvote:hover,
+.Post__arrows__downvote:hover {
+    font-variation-settings: "FILL" 0, "wght" 900, "GRAD" 0, "opsz" 25;
+    cursor: pointer;
+}
+
+.Post__arrows__upvote {
+    color: map-get($theme-colors, "success");
+}
+
+.Post__arrows__downvote {
+    color: map-get($theme-colors, "danger");
+}
+
+.Post__image {
+    grid-column: 2 / span 5;
+    padding: 1rem;
+    box-shadow: -5px 5px 5px 5px rgba(map-get($theme-colors, "dark"), 0.2);
+    border-radius: 10px;
+    font-size: 1.8rem;
+}
+
+.Post__date {
+    grid-column: 1 / span 2;
+}
+
+.Post__date,
+.Post__author,
+.Post__comments {
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Post__author {
+    grid-column: 3 / span 2;
+    color: map-get($theme-colors, "info");
+}
+
+.Post__comments {
+    grid-column: 5 / span 2;
+    color: gray;
+    &:hover {
+        color: map-get($theme-colors, "dark");
+        cursor: pointer;
+    }
+}
+
+.commentList {
+    grid-column: 1 / span 6;
+}
+
+.imageContainer {
+    overflow: hidden;
+    width: 100%; // Make it responsive
+    height: 75%; // Maintain aspect ratio
+    display: flex;
+    justify-content: center; // Center the image horizontally
+    align-items: center; // Center the image vertically
+}
+
+.imageContainer img {
+    max-width: 100%; // Maximum size is the container size
+    max-height: 100%; // Maximum height is the container size
+    object-fit: contain; // Ensures the image is fully visible within the container
+}
+
+.testBox {
+    border: solid 1px map-get($theme-colors, "danger");
+}
+
+.small {
+    height: 10rem;
+}
+
+.big {
+    height: 60rem;
+}
+
+.visible {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .Post {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; /* Adjust column sizes if needed */
+        grid-template-rows: auto auto auto auto; /* Adjust based on content size */
+        grid-template-areas:
+            "arrows name name name name name"
+            "image image image image image image"
+            "date date author author comments comments"
+            "commentList commentList commentList commentList commentList commentList";
+        gap: 0.5rem; /* Optional: for spacing between grid items */
+    }
+
+    .Post__name {
+        grid-area: name;
+        font-size: 1.9rem;
+    }
+
+    .Post__arrows {
+        grid-area: arrows;
+        height: 15rem;
+    }
+
+    .Post__image {
+        grid-area: image;
+    }
+
+    .Post__date {
+        grid-area: date;
+    }
+
+    .Post__author {
+        grid-area: author;
+    }
+
+    .Post__comments {
+        grid-area: comments;
+    }
+
+    .commentList {
+        grid-area: commentList;
+    }
+}

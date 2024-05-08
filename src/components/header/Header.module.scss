@@ -1,0 +1,91 @@
+@import "../../scss/common.scss";
+
+.Header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "subreddit search logo";
+    margin: 2rem;
+}
+
+.subreddit {
+    grid-area: subreddit;
+    margin: auto 0;
+}
+
+.search {
+    grid-area: search;
+    width: 100%;
+}
+
+.logo {
+    grid-area: logo;
+    text-align: right;
+    margin: auto 0;
+}
+
+.navbarButton {
+    grid-area: navbarButton;
+    visibility: hidden;
+}
+
+.logoContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.colored {
+    color: map-get($theme-colors, "info");
+}
+
+.icon {
+    fill: map-get($theme-colors, "info");
+}
+
+.navbarList {
+    position: absolute;
+    top: 6rem;
+    left: 0;
+    width: 100%;
+    background-color: map-get($theme-colors, "primary");
+    max-height: calc(100vh - 6rem);
+    overflow: auto;
+}
+
+.disabled {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+@media screen and (max-width: 768px) {
+    .Header {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "logo navbarButton" "search search" "subreddit subreddit";
+        width: 100%;
+        margin: 0;
+        padding: 10px;
+        position: fixed;
+        background-color: map-get($theme-colors, "primary");
+    }
+
+    .navbarButton {
+        visibility: visible;
+        align-self: center;
+        justify-self: end;
+        width: 2.5rem;
+        padding: auto;
+        border-radius: 5px;
+    }
+
+    .navbarButton:hover {
+        cursor: pointer;
+        background-color: map-get($theme-colors, "primary");
+    }
+
+    .logo {
+        text-align: left;
+    }
+}

@@ -1,0 +1,36 @@
+@import "../../scss/common.scss";
+
+.NavBarTile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2rem;
+    background-color: map-get($theme-colors, "light");
+    margin: 2rem;
+    border-radius: 2rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+
+    &:hover {
+        background-color: map-get($theme-colors, "secondary");
+        color: map-get($theme-colors, "light");
+        cursor: pointer;
+        .NavBarTile__text {
+            color: map-get($theme-colors, "light");
+        }
+    }
+}
+
+.NavBarTile__icon {
+    margin-right: 10px;
+    width: 5rem;
+    height: auto;
+    aspect-ratio: 1/1;
+    background-color: map-get($theme-colors, "info");
+    border-radius: 50%;
+}
+
+.NavBarTile__text {
+    font-size: 1.8rem;
+    color: map-get($theme-colors, "dark");
+}

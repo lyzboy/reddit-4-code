@@ -1,0 +1,21 @@
+.HomePage {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 100%;
+    overflow: visible;
+}
+
+.nav {
+    position: sticky;
+    top: 0;
+}
+
+.disabled {
+    display: none;
+}
+
+.visible {
+    display: block;
+}

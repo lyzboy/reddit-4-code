@@ -1,0 +1,21 @@
+@import "../../scss/common.scss";
+
+.Comment {
+    margin: 1rem;
+    background-color: map-get($theme-colors, "primary");
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.userName {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-right: 1rem;
+    color: map-get($theme-colors, "dark");
+    margin-bottom: 1rem;
+}
+
+.text {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
