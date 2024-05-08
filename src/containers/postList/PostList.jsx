@@ -4,9 +4,9 @@ import Post from "../post/Post";
 
 import styles from "./PostList.module.scss";
 
-const PostList = () => {
+const PostList = ({ parentClassName }) => {
     return (
-        <div className={`${styles.PostList}`}>
+        <div className={`${parentClassName} ${styles.PostList}`}>
             <Post className={""} />
             <Post className={""} />
             <Post className={""} />

@@ -44,10 +44,12 @@
 
 .navbarList {
     position: absolute;
-    top: 7rem;
+    top: 6rem;
     left: 0;
     width: 100%;
     background-color: map-get($theme-colors, "primary");
+    max-height: calc(100vh - 6rem);
+    overflow: auto;
 }
 
 .disabled {
@@ -62,6 +64,11 @@
     .Header {
         grid-template-columns: 1fr 1fr;
         grid-template-areas: "logo navbarButton" "search search" "subreddit subreddit";
+        width: 100%;
+        margin: 0;
+        padding: 10px;
+        position: fixed;
+        background-color: map-get($theme-colors, "primary");
     }
 
     .navbarButton {
