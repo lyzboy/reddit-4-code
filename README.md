@@ -43,8 +43,8 @@ This project is a static front-end only app and will be the following technologi
 -   Redux: Redux has been chosen to manage the state of the app and to allow for easy access to the state from any component.
 -   SCSS: SCSS has been chosen to allow for easy styling of the app and to allow for the use of variables, mixins, and modules.
 -   React-Router: React-Router has been chosen to allow for easy navigation between different parts of the app.
--   Jest: Jest has been chosen for its ease of testing with React components.
--   Enzyme: Enzyme has been chosen to allow for easy testing of JS functions.
+-   Jest and Enzyme: Jest and Enzyme has been chosen for its ease of testing with React components.
+-   Mocha: Mocha has been chosen to allow for easy testing of JS functions.
 -   RTL: RTL has been chosen to allow for easy testing of React components.
 -   Netlify: Netlify has been chosen to host the app and to allow for easy deployment of the app.
 -   GitHub Actions: GitHub Actions has been chosen to allow for continuous integration and continuous deployment of the app.
