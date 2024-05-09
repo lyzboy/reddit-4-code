@@ -11,25 +11,34 @@ export const redirectToRedditAuth = () => {
 };
 
 export const extractToken = () => {
-    // get the fragment data from the hash and remove the # symbol
     const fragment = window.location.hash.substring(1);
-    // get the search params from the fragment
     const params = new URLSearchParams(fragment);
-    // retrieve the access token from the params
     const accessToken = params.get("access_token");
-    // retrieve the random state provided during auth
+    const expiresIn = params.get("expires_in"); // get the expires_in parameter
     const returnedState = params.get("state");
     console.log(`State: ${state}, Returned state: ${returnedState}`);
     if (returnedState !== state) {
         throw new Error("State mismatch: potential CSRF attack");
     }
 
+    const expirationTime = new Date().getTime() + expiresIn * 1000; // calculate the expiration time
     localStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("expirationTime", expirationTime); // store the expiration time
     return accessToken;
 };
 
 export const getStoredToken = () => {
     const token = localStorage.getItem("accessToken");
+    const expirationTime = localStorage.getItem("expirationTime"); // get the stored expiration time
+
+    if (new Date().getTime() > expirationTime) {
+        // if the current time is greater than the expiration time
+        localStorage.removeItem("accessToken"); // remove the expired token
+        localStorage.removeItem("expirationTime"); // remove the expired time
+        redirectToRedditAuth(); // redirect to authenticate again
+        return null;
+    }
+
     return token;
 };
 
