@@ -6,7 +6,7 @@ import NavBarTile from "../../components/navBarTile/NavBarTile";
 
 const NavBar = ({ className }) => {
     return (
-        <nav className={`${className} ${styles.NavBar}`}>
+        <nav className={` ${className} ${styles.NavBar}`}>
             <h2>Subreddits</h2>
             <NavBarTile />
             <NavBarTile />

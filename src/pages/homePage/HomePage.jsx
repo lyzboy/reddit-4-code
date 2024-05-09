@@ -84,7 +84,7 @@ const HomePage = () => {
             <PostList parentClassName="postList" />
 
             <NavBar
-                className={`${styles.nav} ${
+                className={`mainNavBar  ${styles.nav} ${
                     showNav ? styles.visible : styles.disabled
                 }`}
             />
