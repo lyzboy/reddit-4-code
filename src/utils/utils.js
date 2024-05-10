@@ -14,3 +14,12 @@ export function GenerateARandomString() {
         Math.random().toString(36).substring(2, 15)
     );
 }
+
+export const subredditList = [
+    "programming",
+    "react",
+    "reduxjs",
+    "web_programming",
+    "csharp",
+    "compsci",
+];
