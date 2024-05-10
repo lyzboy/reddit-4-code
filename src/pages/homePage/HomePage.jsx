@@ -4,7 +4,9 @@ import {
     extractToken,
     verifyTokenExpirationValid,
 } from "../../services/authService";
-import { fetchNewPosts } from "../../services/redditServices";
+import { fetchNewPosts, fetchUserData } from "../../services/redditServices";
+
+import { subredditList } from "../../utils/utils";
 
 import PostList from "../../containers/postList/PostList";
 import NavBar from "../../containers/navBar/NavBar";
@@ -14,6 +16,7 @@ import styles from "./HomePage.module.scss";
 const HomePage = () => {
     const [showNav, setShowNav] = useState(false);
     const [token, setToken] = useState(null);
+    const [currentSubreddit, setCurrentSubreddit] = useState("programming");
 
     useEffect(() => {
         async function authenticate() {
@@ -23,6 +26,9 @@ const HomePage = () => {
                     await redirectToRedditAuth();
                 } else {
                     setToken(accessToken);
+                    //TODO: add user name with logout button to header
+                    const userData = await fetchUserData(accessToken);
+                    console.log("UserData: ", userData);
                 }
             } catch (error) {
                 console.error("Failed to fetch user data:", error);
@@ -34,10 +40,13 @@ const HomePage = () => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const newPosts = await fetchNewPosts("code", token);
+                const newPosts = await fetchNewPosts(currentSubreddit, token);
                 console.log(newPosts);
             } catch (error) {
-                console.error("Failed to fetch new posts:", error);
+                console.error(
+                    `Failed to fetch new posts from ${currentSubreddit}:`,
+                    error
+                );
             }
         }
 
@@ -94,6 +103,11 @@ const HomePage = () => {
             <PostList parentClassName="postList" />
 
             <NavBar
+                handleClick={() => {
+                    window.scrollTo(0, 0);
+                    console.log("Not mobile nav");
+                }}
+                subredditList={subredditList}
                 className={`mainNavBar  ${styles.nav} ${
                     showNav ? styles.visible : styles.disabled
                 }`}

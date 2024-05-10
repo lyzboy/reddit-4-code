@@ -3,10 +3,12 @@ import { Outlet } from "react-router-dom";
 
 import Header from "../header/Header";
 
+import { subredditList } from "../../utils/utils";
+
 const Root = () => {
     return (
         <>
-            <Header />
+            <Header subredditList={subredditList} />
             <Outlet />
             <footer>Footer Content here</footer>
         </>

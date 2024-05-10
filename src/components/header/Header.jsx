@@ -7,11 +7,12 @@ import styles from "./Header.module.scss";
 
 import logo from "../../assets/images/readIt4Code_logo.jpg";
 
-const Header = () => {
+const Header = ({ subredditList }) => {
     const [showNav, setShowNav] = useState(false);
 
     const handleShowNav = () => {
         setShowNav(!showNav);
+        window.scrollTo(0, 0);
     };
 
     useEffect(() => {
@@ -33,6 +34,9 @@ const Header = () => {
 
     return (
         <header className={styles.Header}>
+            {
+                // TODO: use store.state to set the current subreddit name
+            }
             <h2 className={styles.subreddit}>
                 Current Subreddit Name going to make it super long to see how it
                 fits
@@ -63,6 +67,8 @@ const Header = () => {
                 </h1>
             </div>
             <NavBar
+                subredditList={subredditList}
+                handleClick={() => handleShowNav()}
                 className={`${styles.navbarList} ${
                     showNav ? styles.visible : styles.disabled
                 }`}
