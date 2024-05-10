@@ -20,6 +20,9 @@
         }
     }
 }
+a {
+    text-decoration: none;
+}
 
 .NavBarTile__icon {
     margin-right: 10px;
@@ -33,4 +36,5 @@
 .NavBarTile__text {
     font-size: 1.8rem;
     color: map-get($theme-colors, "dark");
+    text-decoration: none;
 }
