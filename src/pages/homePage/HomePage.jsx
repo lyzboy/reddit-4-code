@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import {
-    isAuthenticated,
-    getStoredToken,
     redirectToRedditAuth,
     extractToken,
+    verifyTokenExpirationValid,
 } from "../../services/authService";
 import { fetchNewPosts } from "../../services/redditServices";
 
@@ -14,25 +13,36 @@ import styles from "./HomePage.module.scss";
 
 const HomePage = () => {
     const [showNav, setShowNav] = useState(false);
+    const [token, setToken] = useState(null);
+
+    useEffect(() => {
+        async function authenticate() {
+            try {
+                const accessToken = extractToken();
+                if (!accessToken || !verifyTokenExpirationValid()) {
+                    await redirectToRedditAuth();
+                } else {
+                    setToken(accessToken);
+                }
+            } catch (error) {
+                console.error("Failed to fetch user data:", error);
+            }
+        }
+        authenticate();
+    }, []);
 
     useEffect(() => {
         async function fetchData() {
-            if (!isAuthenticated()) {
-                await redirectToRedditAuth();
-                extractToken();
-            } else {
-                const accessToken = getStoredToken();
-                try {
-                    const newPosts = await fetchNewPosts("code", accessToken);
-                    console.log(newPosts);
-                } catch (error) {
-                    console.error("Failed to fetch new posts:", error);
-                    //redirectToRedditAuth();
-                }
+            try {
+                const newPosts = await fetchNewPosts("code", token);
+                console.log(newPosts);
+            } catch (error) {
+                console.error("Failed to fetch new posts:", error);
             }
         }
+
         fetchData();
-    }, []);
+    }, [token]);
 
     useEffect(() => {
         const mediaQuery = window.matchMedia("(max-width: 768px)");

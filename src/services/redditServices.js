@@ -8,11 +8,6 @@ export const fetchUserData = async (accessToken) => {
         },
     });
 
-    if (!checkForTokenValidation(response.status)) {
-        redirectToRedditAuth();
-        return null;
-    }
-
     return await response.json();
 };
 
@@ -26,21 +21,8 @@ export const fetchNewPosts = async (subreddit, accessToken) => {
             },
         }
     );
-
-    if (!checkForTokenValidation(response.status)) {
-        redirectToRedditAuth();
-        return null;
+    if (response.status !== 200) {
+        throw new Error("Failed to fetch new posts");
     }
-
     return await response.json();
-};
-
-const checkForTokenValidation = (responseStatus) => {
-    if (responseStatus === 401) {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("expirationTime");
-        return false;
-    }
-
-    return true;
 };
