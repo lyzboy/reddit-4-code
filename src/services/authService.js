@@ -15,6 +15,7 @@ export const redirectToRedditAuth = () => {
 
 export const extractToken = () => {
     const fragment = window.location.hash.substring(1);
+    if (!fragment) return false;
     const params = new URLSearchParams(fragment);
     const accessToken = params.get("access_token");
     const expiresIn = params.get("expires_in"); // get the expires_in parameter
