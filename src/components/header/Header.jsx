@@ -22,22 +22,7 @@ const Header = () => {
             setShowNav(false);
         };
 
-        const resizeLogoMargin = () => {
-            const mainNavBar = document.getElementsByClassName("mainNavBar")[0];
-            console.log(mainNavBar);
-            const mainNavBarWidth = mainNavBar.offsetWidth;
-            console.log(mainNavBarWidth);
-            const logoContainer = document.getElementsByClassName(
-                styles.logoContainer
-            )[0];
-            console.log(logoContainer);
-
-            // set the width of the logoContainer to the width of the mainNavBar
-            logoContainer.style.width = `${mainNavBarWidth}px`;
-        };
-
         handleResize();
-        resizeLogoMargin();
 
         mediaQuery.addEventListener("change", handleResize);
 
@@ -63,7 +48,7 @@ const Header = () => {
             ) : (
                 <span
                     onClick={handleShowNav}
-                    class={`material-symbols-outlined ${styles.navbarButton}`}
+                    className={`material-symbols-outlined ${styles.navbarButton}`}
                 >
                     close
                 </span>
