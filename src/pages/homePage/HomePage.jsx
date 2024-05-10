@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+
 import {
     redirectToRedditAuth,
     extractToken,
@@ -12,8 +14,10 @@ import PostList from "../../containers/postList/PostList";
 import NavBar from "../../containers/navBar/NavBar";
 
 import styles from "./HomePage.module.scss";
+import { addUserData } from "../../redux/features/userData";
 
 const HomePage = () => {
+    const dispatch = useDispatch();
     const [showNav, setShowNav] = useState(false);
     const [token, setToken] = useState(null);
     const [currentSubreddit, setCurrentSubreddit] = useState("programming");
@@ -28,7 +32,7 @@ const HomePage = () => {
                     setToken(accessToken);
                     //TODO: add user name with logout button to header
                     const userData = await fetchUserData(accessToken);
-                    console.log("UserData: ", userData);
+                    dispatch(addUserData(userData));
                 }
             } catch (error) {
                 console.error("Failed to fetch user data:", error);

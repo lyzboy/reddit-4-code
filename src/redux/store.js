@@ -1,5 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 
+import userDataReducer from "./features/userData/userDataSlice";
+import subredditDataReducer from "./features/subredditData/subredditDataSlice";
+
 export default configureStore({
-    reducer: {},
+    reducer: {
+        userData: userDataReducer,
+        subredditData: subredditDataReducer,
+    },
 });

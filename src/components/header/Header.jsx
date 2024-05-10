@@ -1,4 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+
+import { selectAllUserData } from "../../redux/features/userData";
 
 import SearchBar from "../searchBar/SearchBar";
 import NavBar from "../../containers/navBar/NavBar";
@@ -9,6 +12,9 @@ import logo from "../../assets/images/readIt4Code_logo.jpg";
 
 const Header = ({ subredditList }) => {
     const [showNav, setShowNav] = useState(false);
+    const [userName, setUserName] = useState(null);
+
+    const userData = useSelector(selectAllUserData);
 
     const handleShowNav = () => {
         setShowNav(!showNav);
@@ -26,6 +32,9 @@ const Header = ({ subredditList }) => {
         handleResize();
 
         mediaQuery.addEventListener("change", handleResize);
+        if (userData.length > 0) {
+            setUserName(userData[0].name);
+        }
 
         return () => {
             mediaQuery.removeEventListener("change", handleResize);
@@ -37,10 +46,21 @@ const Header = ({ subredditList }) => {
             {
                 // TODO: use store.state to set the current subreddit name
             }
-            <h2 className={styles.subreddit}>
-                Current Subreddit Name going to make it super long to see how it
-                fits
-            </h2>
+            <div className={styles.subreddit}>
+                {userName !== null && (
+                    <div className={styles.login}>
+                        <p
+                            className={styles.userName}
+                        >{`Logged in as ${userName}`}</p>
+                        <button>Logout</button>
+                    </div>
+                )}
+
+                <h2>
+                    Current Subreddit Name going to make it super long to see
+                    how it fits
+                </h2>
+            </div>
             <SearchBar className={styles.search} />
             {!showNav ? (
                 <span
