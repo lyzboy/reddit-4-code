@@ -21,8 +21,10 @@ export const fetchNewPosts = async (subreddit, accessToken) => {
             },
         }
     );
-    if (response.status !== 200) {
-        throw new Error("Failed to fetch new posts");
-    }
+    // if (response.status !== 200) {
+    //     throw new Error(
+    //         `Status of: ${response.status} - Client credentials sent as HTTP Basic Authorization were invalid`
+    //     );
+    // }
     return await response.json();
 };
