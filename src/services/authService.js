@@ -35,7 +35,7 @@ export const extractToken = () => {
 
 export const verifyTokenExpirationValid = () => {
     const expirationTime = localStorage.getItem("expirationTime"); // get the stored expiration time
-
+    if (!expirationTime) return false; // if there is no expiration time, return false
     if (new Date().getTime() > expirationTime) {
         // if the current time is greater than the expiration time
         localStorage.removeItem("expirationTime"); // remove the expired time
@@ -44,4 +44,10 @@ export const verifyTokenExpirationValid = () => {
     }
 
     return true;
+};
+
+export const logout = () => {
+    console.log("Logging out...");
+    localStorage.removeItem("expirationTime");
+    window.location.href = "http://localhost:3000";
 };

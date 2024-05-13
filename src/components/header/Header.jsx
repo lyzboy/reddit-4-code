@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import { selectAllUserData } from "../../redux/features/userData";
+import {
+    selectAllUserData,
+    removeUserData,
+    selectCurrentUser,
+} from "../../redux/features/userData";
+
+import { logout } from "../../services/authService";
 
 import SearchBar from "../searchBar/SearchBar";
 import NavBar from "../../containers/navBar/NavBar";
@@ -14,7 +20,7 @@ const Header = ({ subredditList }) => {
     const [showNav, setShowNav] = useState(false);
     const [userName, setUserName] = useState(null);
 
-    const userData = useSelector(selectAllUserData);
+    const userData = useSelector(selectCurrentUser);
 
     const handleShowNav = () => {
         setShowNav(!showNav);
@@ -32,27 +38,32 @@ const Header = ({ subredditList }) => {
         handleResize();
 
         mediaQuery.addEventListener("change", handleResize);
-        if (userData.length > 0) {
-            setUserName(userData[0].name);
-        }
 
         return () => {
             mediaQuery.removeEventListener("change", handleResize);
         };
     }, []);
 
+    useEffect(() => {
+        if (userData) {
+            setUserName(userData.name);
+        }
+    }, [userData]);
+
+    const handleLogout = () => {
+        removeUserData();
+        logout();
+    };
+
     return (
         <header className={styles.Header}>
-            {
-                // TODO: use store.state to set the current subreddit name
-            }
             <div className={styles.subreddit}>
                 {userName !== null && (
                     <div className={styles.login}>
                         <p
                             className={styles.userName}
                         >{`Logged in as ${userName}`}</p>
-                        <button>Logout</button>
+                        <button onClick={handleLogout}>Logout</button>
                     </div>
                 )}
 

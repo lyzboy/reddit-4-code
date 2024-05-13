@@ -1,7 +1,6 @@
 export {
     default as userDataReducer,
-    selectAllUserData,
     addUserData,
     removeUserData,
-    updateUserData,
+    selectCurrentUser,
 } from "./userDataSlice";
