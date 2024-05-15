@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import {
     redirectToRedditAuth,
@@ -16,14 +16,22 @@ import NavBar from "../../containers/navBar/NavBar";
 
 import styles from "./HomePage.module.scss";
 import { addUserData } from "../../redux/features/userData";
+import {
+    updateCurrentSubreddit,
+    updatePosts,
+    selectCurrentSubreddit,
+    selectPosts,
+} from "../../redux/features/subredditData/subredditDataSlice";
 
 const HomePage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
+    const { pathname } = location;
 
     const [showNav, setShowNav] = useState(false);
     const [token, setToken] = useState(null);
-    const [currentSubreddit, setCurrentSubreddit] = useState("programming");
+    const currentSubreddit = useSelector(selectCurrentSubreddit);
 
     useEffect(() => {
         async function authenticate() {
@@ -35,7 +43,9 @@ const HomePage = () => {
                     setToken(accessToken);
                     const userData = await fetchUserData(accessToken);
                     dispatch(addUserData(userData));
-                    navigate("/programming");
+                    const subreddit = "programming"; // replace with the subreddit you want
+                    dispatch(updateCurrentSubreddit(subreddit));
+                    navigate(`/${subreddit}`);
                 }
             } catch (error) {
                 console.error("Failed to fetch user data:", error);
@@ -49,6 +59,7 @@ const HomePage = () => {
             try {
                 const newPosts = await fetchNewPosts(currentSubreddit, token);
                 console.log(newPosts);
+                dispatch(updatePosts(newPosts.data.children));
             } catch (error) {
                 console.error(
                     `Failed to fetch new posts from ${currentSubreddit}:`,
@@ -58,7 +69,7 @@ const HomePage = () => {
         }
 
         fetchData();
-    }, [token]);
+    }, [currentSubreddit]);
 
     useEffect(() => {
         const mediaQuery = window.matchMedia("(max-width: 768px)");

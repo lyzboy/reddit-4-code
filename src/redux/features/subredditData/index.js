@@ -1,7 +1,6 @@
 export {
     default as subredditDataReducer,
-    selectAllSubredditData,
-    addSubredditData,
-    removeSubredditData,
-    updateSubredditData,
+    updateCurrentSubreddit,
+    updatePosts,
+    selectCurrentSubreddit,
 } from "./subredditDataSlice";

@@ -1,21 +1,27 @@
-import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
-const subredditDataAdapter = createEntityAdapter();
+const initialState = {
+    currentSubreddit: null,
+    posts: [],
+};
 
 const subredditDataSlice = createSlice({
     name: `subredditData`,
-    initialState: subredditDataAdapter.getInitialState(),
+    initialState,
     reducers: {
-        addSubredditData: subredditDataAdapter.addOne,
-        removeSubredditData: subredditDataAdapter.removeOne,
-        updateSubredditData: subredditDataAdapter.updateOne,
+        updateCurrentSubreddit: (state, action) => {
+            state.currentSubreddit = action.payload;
+        },
+        updatePosts: (state, action) => {
+            state.posts = action.payload;
+        },
     },
 });
 
-export const { selectAll: selectAllSubredditData } =
-    subredditDataAdapter.getSelectors((state) => state.subredditData);
-
-export const { addSubredditData, removeSubredditData, updateSubredditData } =
+export const { updateCurrentSubreddit, updatePosts } =
     subredditDataSlice.actions;
+export const selectCurrentSubreddit = (state) =>
+    state.subredditData.currentSubreddit;
+export const selectPosts = (state) => state.subredditData.posts;
 
 export default subredditDataSlice.reducer;
