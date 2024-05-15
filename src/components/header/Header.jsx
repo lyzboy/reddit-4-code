@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import {
-    selectAllUserData,
     removeUserData,
     selectCurrentUser,
 } from "../../redux/features/userData";
@@ -15,10 +14,12 @@ import NavBar from "../../containers/navBar/NavBar";
 import styles from "./Header.module.scss";
 
 import logo from "../../assets/images/readIt4Code_logo.jpg";
+import { selectCurrentSubreddit } from "../../redux/features/subredditData/subredditDataSlice";
 
 const Header = ({ subredditList }) => {
     const [showNav, setShowNav] = useState(false);
     const [userName, setUserName] = useState(null);
+    const currentSubreddit = useSelector(selectCurrentSubreddit);
 
     const userData = useSelector(selectCurrentUser);
 
@@ -67,10 +68,7 @@ const Header = ({ subredditList }) => {
                     </div>
                 )}
 
-                <h2>
-                    Current Subreddit Name going to make it super long to see
-                    how it fits
-                </h2>
+                <h2>{currentSubreddit && `/r/${currentSubreddit}`}</h2>
             </div>
             <SearchBar className={styles.search} />
             {!showNav ? (

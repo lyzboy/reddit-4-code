@@ -15,11 +15,11 @@ function decodeHtml(html) {
 
 const Post = ({ className, post }) => {
     const postName = decodeHtml(post.data.title);
-    const postText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+    const postText = post.data.selftext;
 
     const votes = 100;
 
-    const author = "ZzWingManzZ";
+    const author = post.data.author;
 
     const commentCount = 55;
 
@@ -30,7 +30,7 @@ const Post = ({ className, post }) => {
             <h2 className={`${styles.Post__name} ${styles.small}`}>
                 {postName}
             </h2>
-            <div className={`${styles.Post__arrows} ${styles.big}`}>
+            <div className={`${styles.Post__arrows}`}>
                 <span
                     className={`material-symbols-outlined ${styles.Post__arrows__upvote}`}
                 >
@@ -47,7 +47,7 @@ const Post = ({ className, post }) => {
                     arrow_downward
                 </span>
             </div>
-            <div className={`${styles.Post__image} ${styles.big}`}>
+            <div className={`${styles.Post__image}`}>
                 {post.data.media !== null && (
                     // <div className={styles.imageContainer}>
                     //     {decodeURIComponent(post.data.media.oembed.html)}
@@ -63,14 +63,16 @@ const Post = ({ className, post }) => {
                     />
                 )}
 
-                <a href={post.data.url}>{post.data.url}</a>
-                <p>{post.data.selftext}</p>
+                <a className={styles.wrapText} href={post.data.url}>
+                    {post.data.url}
+                </a>
+                <p className={styles.wrapText}>{postText}</p>
             </div>
             <div className={`${styles.Post__date} ${styles.small}`}>
                 <p>{FormatLocalDate(post.data.created)}</p>
             </div>
             <div className={`${styles.Post__author} ${styles.small}`}>
-                <p>{post.data.author}</p>
+                <p>{author}</p>
             </div>
             <div
                 className={`${styles.Post__comments} ${styles.small}`}
