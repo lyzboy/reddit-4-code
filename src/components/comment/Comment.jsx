@@ -1,15 +1,11 @@
 import React from "react";
-
 import styles from "./Comment.module.scss";
 
-const Comment = () => {
+const Comment = ({ userName, comment }) => {
     return (
         <div className={styles.Comment}>
-            <h4 className={styles.userName}>User Name</h4>
-            <p className={styles.text}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
+            <h4 className={styles.userName}>{userName}</h4>
+            <p className={styles.text}>{comment}</p>
         </div>
     );
 };

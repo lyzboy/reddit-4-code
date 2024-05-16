@@ -10,6 +10,7 @@ const NavBar = ({ className, subredditList, handleClick }) => {
             <h2>Subreddits</h2>
             {subredditList.map((subreddit) => (
                 <NavBarTile
+                    key={subreddit}
                     handleClick={() => handleClick()}
                     pathName={subreddit}
                 />

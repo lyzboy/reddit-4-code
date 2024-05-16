@@ -8,6 +8,7 @@
     padding: 1rem;
     border-bottom: solid 1px map-get($theme-colors, "dark");
     font-size: 1.2rem;
+    min-width: 100%;
 }
 
 .Post__name {
@@ -52,7 +53,7 @@
     color: map-get($theme-colors, "danger");
 }
 
-.Post__image {
+.Post__content {
     grid-column: 2 / span 5;
     padding: 1rem;
     box-shadow: -5px 5px 5px 5px rgba(map-get($theme-colors, "dark"), 0.2);
@@ -154,7 +155,7 @@
         height: 15rem;
     }
 
-    .Post__image {
+    .Post__content {
         grid-area: image;
     }
 

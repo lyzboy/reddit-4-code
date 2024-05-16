@@ -8,11 +8,10 @@ import { selectPosts } from "../../redux/features/subredditData/subredditDataSli
 
 const PostList = ({ parentClassName }) => {
     const posts = useSelector(selectPosts);
-    console.log("POSTS: ", posts);
     return (
         <div className={`${parentClassName} ${styles.PostList}`}>
             {posts.map((post) => (
-                <Post key={post.id} className={""} post={post} />
+                <Post key={post.data.id} className={""} post={post} />
             ))}
         </div>
     );

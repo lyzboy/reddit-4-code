@@ -1,13 +1,12 @@
-export function FormatLocalDate(date) {
+export function FormatLocalDate(unixTimestamp) {
+    const date = new Date(unixTimestamp * 1000); // Convert seconds to milliseconds
     const options = {
         year: "2-digit",
         month: "numeric",
         day: "numeric",
     };
-
-    return new Date(date).toLocaleDateString(undefined, options);
+    return date.toLocaleDateString(undefined, options);
 }
-
 export function GenerateARandomString() {
     return (
         Math.random().toString(36).substring(2, 15) +

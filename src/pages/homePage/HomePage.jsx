@@ -20,7 +20,6 @@ import {
     updateCurrentSubreddit,
     updatePosts,
     selectCurrentSubreddit,
-    selectPosts,
 } from "../../redux/features/subredditData/subredditDataSlice";
 
 const HomePage = () => {
@@ -30,70 +29,80 @@ const HomePage = () => {
     const { pathname } = location;
 
     const [showNav, setShowNav] = useState(false);
-    const [token, setToken] = useState(null);
+    const [token, setToken] = useState(localStorage.getItem("accessToken"));
     const currentSubreddit = useSelector(selectCurrentSubreddit);
 
     useEffect(() => {
-        async function authenticate() {
+        const initializeUserAndNavigate = async (accessToken) => {
+            setToken(accessToken);
+            const userData = await fetchUserData(accessToken);
+            dispatch(addUserData(userData));
+            const subreddit = currentSubreddit
+                ? currentSubreddit
+                : "programming"; // replace with the subreddit you want
+            dispatch(updateCurrentSubreddit(subreddit));
+            navigate(`/${subreddit}`);
+        };
+
+        const authenticate = async () => {
             try {
                 const accessToken = extractToken();
                 if (!accessToken || !verifyTokenExpirationValid()) {
                     await redirectToRedditAuth();
                 } else {
-                    setToken(accessToken);
-                    const userData = await fetchUserData(accessToken);
-                    dispatch(addUserData(userData));
-                    const subreddit = "programming"; // replace with the subreddit you want
-                    dispatch(updateCurrentSubreddit(subreddit));
-                    navigate(`/${subreddit}`);
+                    initializeUserAndNavigate(accessToken);
                 }
             } catch (error) {
                 console.error("Failed to fetch user data:", error);
             }
+        };
+
+        if (!token) {
+            authenticate();
+        } else if (!verifyTokenExpirationValid()) {
+            authenticate();
+        } else {
+            initializeUserAndNavigate(token);
         }
-        authenticate();
-    }, []);
+    }, [token, dispatch, navigate]);
 
     useEffect(() => {
-        async function fetchData() {
-            try {
-                const newPosts = await fetchNewPosts(currentSubreddit, token);
-                console.log(newPosts);
-                dispatch(updatePosts(newPosts.data.children));
-            } catch (error) {
-                console.error(
-                    `Failed to fetch new posts from ${currentSubreddit}:`,
-                    error
-                );
-            }
-        }
+        if (currentSubreddit && token) {
+            const fetchData = async () => {
+                try {
+                    const newPosts = await fetchNewPosts(
+                        currentSubreddit,
+                        token
+                    );
+                    dispatch(updatePosts(newPosts.data.children));
+                } catch (error) {
+                    console.error(
+                        `Failed to fetch new posts from ${currentSubreddit}:`,
+                        error
+                    );
+                    localStorage.removeItem("accessToken");
+                    localStorage.removeItem("expirationTime");
+                    navigate("/");
+                }
+            };
 
-        fetchData();
-    }, [currentSubreddit]);
+            fetchData();
+        }
+    }, [currentSubreddit, token, dispatch, navigate]);
 
     useEffect(() => {
         const mediaQuery = window.matchMedia("(max-width: 768px)");
 
-        /**
-         * Handles the resize event and adjusts the layout based on the media query match.
-         */
         const handleResize = () => {
-            // Set the value of showNav based on the media query match
             setShowNav(!mediaQuery.matches);
             adjustPostListMargin(mediaQuery.matches);
         };
 
-        /**
-         * Adjusts the margin-top of the postList based on the media query match due to the fixed header position.
-         */
         const adjustPostListMargin = (matches) => {
-            // Get the postList and header elements
             const postListElement = document.querySelector(".postList");
             const headerElement = document.querySelector("header");
 
-            // Adjust the margin-top of the postList based on the media query match
             if (matches) {
-                // Check if headerElement and postListElement are not null before accessing clientHeight
                 if (headerElement && postListElement) {
                     const navBarHeight = headerElement.clientHeight;
                     postListElement.style.marginTop = `${navBarHeight}px`;
@@ -105,12 +114,10 @@ const HomePage = () => {
             }
         };
 
-        // Initial check and setting of setShowNav
         handleResize();
 
         mediaQuery.addEventListener("change", handleResize);
 
-        // Cleanup function
         return () => {
             mediaQuery.removeEventListener("change", handleResize);
         };
